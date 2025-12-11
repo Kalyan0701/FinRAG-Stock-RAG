@@ -1,126 +1,84 @@
 # FinRAG: A Retrieval-Augmented Generation System for Stock Market Insights and Investment Strategies
 
-This repository contains **FinRAG**, a Retrieval-Augmented Generation (RAG) system designed to provide **stock market insights and investment strategy explanations** using a combination of:
+FinRAG is a complete Retrieval-Augmented Generation (RAG) system designed to produce grounded explanations, stock market insights, and investment strategy reasoning. It retrieves information from multiple financial sources and generates context-aware responses using modern Large Language Models (LLMs).
 
-- Community discussions (Reddit finance & investing subreddits),
-- Historical stock CSV data,
-- Finance/economics books and research papers in PDF,
-- Modern embedding models and LLMs.
+FinRAG integrates:
+- Reddit financial discussions  
+- Historical stock CSV datasets  
+- Finance books and research papers  
+- PDF parsing with LlamaParse  
+- Embedding models with FAISS vector search  
+- LLMs such as Mistral, Phi-3, and LLaMA  
 
->  **Disclaimer:**  
-> This project is for **educational and research purposes only**. It does *not* provide personalized financial advice or real-time trading recommendations.
+Disclaimer: This system is for educational and research purposes only. It does not provide personal financial advice.
+
+---
+
+## Repository Structure
+
+FinRAG-Stock-RAG/
+├── FinRAG_RAG_Pipeline.ipynb # Full RAG pipeline notebook
+├── FinRAG_Presentation.pptx # Project slides
+├── README.md # Documentation (this file)
+└── requirements.txt # Dependencies
+
+Example dataset structure:
+dataset/
+Reddit/.jsonl
+top10Stocks/.csv
+books/.pdf
+papers/.pdf
+
+index_bge_large/
+faiss_index.bin
+metadata.jsonl
+
 
 ---
 
 ## 1. Project Overview
 
-**Goal:**  
-FinRAG shows how to build an **end-to-end RAG pipeline** for finance:
+FinRAG answers finance-related questions using retrieval followed by LLM generation.
 
-1. **Collect & preprocess** financial knowledge sources (Reddit, CSV stock data, finance PDFs).
-2. **Build a dense vector index** using a modern embedding model (`BAAI/bge-large-en-v1.5`) and FAISS.
-3. **Retrieve relevant context** for a user’s question.
-4. **Feed the retrieved context into an LLM** (e.g., Mistral-7B) to generate grounded answers.
-5. **Evaluate** the system using a set of benchmark questions and semantic similarity metrics.
+### Core Components
+- Extraction and preprocessing of Reddit posts  
+- Loading and cleaning stock CSV data  
+- Parsing PDF books and papers  
+- Chunking text and generating embeddings  
+- Building a FAISS vector index  
+- Retrieving relevant text chunks  
+- Generating grounded answers using LLMs  
 
-The system is targeted at:
+### Supported Models
+- Mistral-7B-Instruct  
+- Phi-3-Mini-Instruct  
+- LLaMA 3.1 Instruct  
 
-- Students interested in **NLP + finance**,
-- Researchers exploring **RAG architectures**,
-- Anyone curious about combining **discussion data + documents + LLMs** in a structured way.
+### Evaluation
+- Semantic similarity scoring  
+- JSONL logs for reproducibility  
+- Multi-model comparison  
 
 ---
 
-FinRAG: A Retrieval-Augmented Generation System for Stock Market Insights and Investment Strategies
+## 2. Installation
 
-FinRAG is a complete Retrieval-Augmented Generation (RAG) pipeline designed to generate finance-grounded explanations, stock market insights, and investment strategy analysis.
+### Create a virtual environment
 
-The system integrates:
-
-Reddit financial discussions
-
-Historical stock CSV data
-
-Finance books & research papers (PDFs)
-
-Modern embedding models + FAISS vector search
-
-LLMs such as Mistral, Phi-3, and LLaMA
-
-FinRAG demonstrates how retrieval-based LLMs can support education, research, and financial understanding — while explicitly avoiding personal financial advice.
-
-📁 Repository Structure
-FinRAG-Stock-RAG/
-├── FinRAG_RAG_Pipeline.ipynb       # Full RAG pipeline notebook
-├── FinRAG_Presentation.pptx        # Project presentation slides
-├── README.md                       # Documentation manual (this file)
-└── requirements.txt                # List of dependencies
-
-Example dataset folder structure (optional):
-dataset/
-  Reddit/*.jsonl
-  top10Stocks/*.csv
-  books/*.pdf
-  papers/*.pdf
-index_bge_large/
-  faiss_index.bin
-  metadata.jsonl
-
-🧠 1. Project Overview
-
-FinRAG is built to answer finance questions by grounding LLM responses in retrieved evidence.
-The pipeline performs:
-
-✔ Data Collection & Preprocessing
-
-Reddit posts and comments from finance-related subreddits
-
-Stock CSV datasets
-
-PDF books and academic papers
-
-Automated cleaning, normalization, and chunking using LlamaParse + text splitters
-
-✔ Vector Embedding & Indexing
-
-Embeddings: BAAI/bge-large-en-v1.5
-
-Vector index: FAISS
-
-Stored metadata to ensure traceability
-
-✔ LLM Generation
-
-Uses HuggingFace models such as:
-
-Mistral-7B-Instruct
-
-Phi-3-Mini-4k-Instruct
-
-LLaMA-3.1-Instruct
-
-Retrieved context is injected into a structured prompt to ensure grounded answers.
-
-✔ Evaluation
-
-Model responses benchmarked using semantic similarity
-
-Uses sentence-transformers/all-MiniLM-L6-v2 for lightweight automatic scoring
-
-⚙️ 2. Installation
-Create a virtual environment (recommended)
-macOS / Linux:
+macOS/Linux:
+```bash
 python -m venv venv
 source venv/bin/activate
-
+```
 Windows:
+
 python -m venv venv
 venv\Scripts\activate
 
 Install dependencies
 pip install -r requirements.txt
 
-📦 3. Requirements (requirements.txt)
+3. Requirements
 torch
 transformers
 accelerate
@@ -140,15 +98,13 @@ Optional:
 google-colab
 scikit-learn
 
-🚀 4. Quick Start for Students & Researchers
+4. Quick Start Guide
 
-FinRAG can be run in Google Colab or locally.
-Colab is strongly recommended for ease of use and GPU access.
+FinRAG can be run in Google Colab or on a local machine.
 
-⭐ Option 1 — Run in Google Colab (Recommended)
+Option 1 — Run in Google Colab
 
 Upload the notebook:
-
 FinRAG_RAG_Pipeline.ipynb
 
 Mount Google Drive:
@@ -157,7 +113,7 @@ from google.colab import drive
 drive.mount('/content/drive')
 
 
-Update dataset paths:
+Adjust dataset paths such as:
 
 /content/drive/MyDrive/NLP/dataset/Reddit/
 /content/drive/MyDrive/NLP/dataset/books/
@@ -165,32 +121,27 @@ Update dataset paths:
 /content/drive/MyDrive/NLP/dataset/top10Stocks/
 
 
-Run the notebook top to bottom:
+Run all sections of the notebook:
 
 Install libraries
 
 Load datasets
 
-Build corpus
+Build the corpus
 
 Build FAISS index
 
-Load LLM
+Load the LLM
 
-Run queries
+Run RAG queries
 
-Start interactive chat:
+Start the chat interface:
 
 interactive_rag()
 
+Option 2 — Run Locally
 
-✔ No installation
-✔ GPU provided
-✔ Classroom-friendly
-
-⭐ Option 2 — Run Locally (Advanced)
-
-Clone repository:
+Clone the repository:
 
 git clone https://github.com/<your-username>/FinRAG-Stock-RAG.git
 cd FinRAG-Stock-RAG
@@ -201,81 +152,77 @@ Install dependencies:
 pip install -r requirements.txt
 
 
-Open notebook in Jupyter or VS Code and adjust dataset paths.
+Open the notebook and update dataset paths accordingly.
 
-⚠️ Large models like Mistral-7B require a GPU.
+Note: Running large models like Mistral-7B locally requires a GPU. Use Phi-3 Mini for CPU-based inference.
 
-Use Phi-3 Mini for CPU-friendly inference.
+5. Using FinRAG
 
-💬 5. Using FinRAG
-
-After loading the model and building the index, run:
+After loading the index and LLM, start the interactive mode:
 
 interactive_rag()
 
 
-Ask questions such as:
+You can then ask questions such as:
 
-“How does diversification reduce portfolio risk?”
+How does diversification reduce portfolio risk
 
-“What are long-term risks of investing heavily in tech stocks?”
+Why is overexposure to tech stocks risky
 
-“What drives stock market volatility?”
+What factors influence long-term stock returns
 
-FinRAG will:
+FinRAG will retrieve context, construct a grounded prompt, and generate an evidence-based answer.
 
-Retrieve relevant Reddit posts, book excerpts, PDFs, or historical stock data
-
-Build a grounded RAG prompt
-
-Generate a finance-aware, evidence-backed answer
-
-📈 6. Evaluation
+6. Evaluation Framework
 
 FinRAG includes:
 
-Predefined evaluation questions
+An evaluation dataset
 
-Multi-model comparison (Mistral, Phi, LLaMA)
+Automatic semantic similarity scoring
 
-Scores computed using semantic similarity
+Logs for Mistral, Phi, and LLaMA
 
-JSONL logs for reproducibility
+JSONL outputs for result analysis
 
-This helps measure:
+Researchers can examine:
 
-Answer relevance
+Relevance
 
-Grounding in source data
+Correctness
 
-Model consistency
+Model differences
 
-🛠️ 7. Extending the Project
+Stability across runs
 
-You can extend FinRAG by:
+7. Extending the Project
 
-✔ Adding More Data Sources
+Possible extensions include:
 
-SEC 10-K / 10-Q filings
+Additional Data Sources
 
-Financial news
+SEC filings (10-K, 10-Q)
 
-Macro-economic time series
+Financial news articles
 
-✔ Adding a Web UI
+Macroeconomic datasets
 
-Streamlit
+Interfaces
 
-Gradio
+Streamlit user interface
 
-✔ Adding Advanced Evaluation
+Gradio chatbot application
+
+Improved Evaluation
+
+Fact verification modules
 
 Hallucination detection
 
-Financial fact verification
+Domain-specific benchmarking
 
-📝 8. Citation
+8. Citation
 
-If you use FinRAG in a class project or research:
+If you use or reference this project in academic work:
 
 FinRAG: A Retrieval-Augmented Generation System for Stock Market Insights and Investment Strategies, University of New Haven (2025).
