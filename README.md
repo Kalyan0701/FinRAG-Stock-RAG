@@ -10,8 +10,6 @@ FinRAG integrates:
 - Embedding models with FAISS vector search  
 - LLMs such as Mistral, Phi-3, and LLaMA  
 
-Disclaimer: This system is for educational and research purposes only. It does not provide personal financial advice.
-
 ---
 
 ## Repository Structure
