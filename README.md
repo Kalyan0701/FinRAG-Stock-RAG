@@ -15,24 +15,25 @@ Disclaimer: This system is for educational and research purposes only. It does n
 ---
 
 ## Repository Structure
-
+```
 FinRAG-Stock-RAG/
 ├── FinRAG_RAG_Pipeline.ipynb # Full RAG pipeline notebook
 ├── FinRAG_Presentation.pptx # Project slides
 ├── README.md # Documentation (this file)
 └── requirements.txt # Dependencies
+```
 
 Example dataset structure:
+```
 dataset/
 Reddit/.jsonl
 top10Stocks/.csv
 books/.pdf
 papers/.pdf
-
 index_bge_large/
 faiss_index.bin
 metadata.jsonl
-
+```
 
 ---
 
