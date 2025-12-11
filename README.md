@@ -189,8 +189,8 @@ Stability across runs
 
 7. Extending the Project
 
-```
 Possible extensions include:
+```
 Additional Data Sources
 SEC filings (10-K, 10-Q)
 Financial news articles
